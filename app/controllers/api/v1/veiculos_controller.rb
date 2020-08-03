@@ -6,7 +6,11 @@ module Api
       # GET /veiculos
       def index
         @veiculos = Veiculo.all
-        render json: @veiculos
+        if @veiculos.present?
+          render json: @veiculos
+        else
+          render json:{mensagem: 'Sem veiculos cadastrados!'}
+        end
       end
 
       # GET /veiculos/1
@@ -17,9 +21,8 @@ module Api
       # POST /veiculos
       def create
         @veiculo = Veiculo.new(veiculo_params)
-      
         if @veiculo.save
-          render json: @veiculo, status: :created, location: @veiculo
+          render json: @veiculo, status: :created
         else
           render json: @veiculo.errors, status: :unprocessable_entity
         end
@@ -37,6 +40,7 @@ module Api
       # DELETE /veiculos/1
       def destroy
         @veiculo.destroy
+        render json:{mensagem: 'Veiculo Deletado!'}
       end
 
     private
