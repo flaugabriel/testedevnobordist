@@ -17,4 +17,3 @@ test:
 
 production:
   <<: *default
-  password: <%= ENV['TESTEDEVNOBORDIST_DATABASE_PASSWORD'] %>
